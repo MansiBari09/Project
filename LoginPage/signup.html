@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - SecureSpace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            padding: 20px;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Particles */
+        .particles { position: fixed; width: 100%; height: 100%; overflow: hidden; pointer-events: none; top: 0; left: 0; z-index: 0; }
+        .particle  { position: absolute; background: rgba(255,255,255,0.15); border-radius: 50%; animation: float 20s infinite; }
+        .particle:nth-child(1) { width:80px;  height:80px;  left:10%; animation-duration:15s; }
+        .particle:nth-child(2) { width:60px;  height:60px;  left:70%; animation-delay:2s; animation-duration:18s; }
+        .particle:nth-child(3) { width:100px; height:100px; left:40%; animation-delay:4s; animation-duration:22s; }
+        .particle:nth-child(4) { width:50px;  height:50px;  left:85%; animation-delay:1s; animation-duration:16s; }
+        .particle:nth-child(5) { width:70px;  height:70px;  left:25%; animation-delay:3s; animation-duration:20s; }
+
+        @keyframes float {
+            0%   { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* ── Wrapper ── */
+        .signup-wrapper {
+            display: flex;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            overflow: hidden;
+            max-width: 1050px;
+            width: 100%;
+            animation: slideUp 0.8s ease-out;
+            position: relative;
+            z-index: 10;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Left Visual Panel ── */
+        .signup-visual {
+            flex: 1;
+            background: linear-gradient(160deg, #764ba2 0%, #667eea 60%, #f093fb 100%);
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .signup-visual::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
+            animation: rotate 25s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .visual-content { position: relative; z-index: 2; text-align: center; }
+
+        .logo-circle {
+            width: 130px; height: 130px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 28px;
+            border: 3px solid rgba(255,255,255,0.35);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse { 0%,100% { transform:scale(1); } 50% { transform:scale(1.05); } }
+
+        .logo-circle svg { width: 65px; height: 65px; fill: white; }
+
+        .visual-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px; font-weight: 900;
+            margin-bottom: 12px; line-height: 1.2;
+        }
+
+        .visual-content p {
+            font-size: 15px; opacity: 0.92;
+            font-weight: 300; line-height: 1.7;
+        }
+
+        /* Steps list on the left */
+        .steps-list {
+            margin-top: 38px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+            width: 100%;
+            max-width: 260px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: fadeInLeft 0.6s ease-out both;
+        }
+
+        .step-item:nth-child(1) { animation-delay: 0.2s; }
+        .step-item:nth-child(2) { animation-delay: 0.4s; }
+        .step-item:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+        .step-num {
+            width: 36px; height: 36px; min-width: 36px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 700; font-size: 14px;
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+
+        .step-text { font-size: 13px; opacity: 0.95; line-height: 1.4; }
+        .step-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+
+        /* ── Right Form Panel ── */
+        .signup-form-container {
+            flex: 1.1;
+            padding: 50px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+
+        .signup-form-container::-webkit-scrollbar { width: 4px; }
+        .signup-form-container::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+
+        .form-header { margin-bottom: 32px; }
+        .form-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px; font-weight: 700;
+            color: var(--dark); margin-bottom: 8px;
+        }
+        .form-header p { color: #7f8c8d; font-size: 14px; font-weight: 300; }
+
+        /* Two column row */
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .input-group { margin-bottom: 20px; position: relative; }
+        .input-group.full { grid-column: 1 / -1; }
+
+        .input-group label {
+            display: block; margin-bottom: 8px;
+            color: var(--dark); font-weight: 600;
+            font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+
+        .input-icon {
+            position: absolute; left: 14px;
+            width: 18px; height: 18px; opacity: 0.45;
+            transition: all 0.3s ease; pointer-events: none;
+        }
+
+        .input-group input {
+            width: 100%; padding: 13px 14px 13px 44px;
+            border: 2px solid #ecf0f1; border-radius: 12px;
+            font-size: 14px; font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease; background: #f8f9fa; color: var(--dark);
+        }
+
+        .input-group input:focus {
+            outline: none; border-color: var(--primary);
+            background: white; box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+        }
+
+        .input-group input.error {
+            border-color: #e74c3c;
+            animation: shake 0.45s ease;
+        }
+
+        @keyframes shake {
+            0%,100% { transform: translateX(0); }
+            25%      { transform: translateX(-8px); }
+            75%      { transform: translateX(8px); }
+        }
+
+        .password-toggle {
+            position: absolute; right: 14px;
+            cursor: pointer; color: #7f8c8d;
+            font-size: 11px; font-weight: 700;
+            transition: color 0.3s; user-select: none;
+        }
+        .password-toggle:hover { color: var(--primary); }
+
+        /* Password strength bar */
+        .strength-bar-wrap {
+            margin-top: 8px;
+            display: none;
+        }
+        .strength-bar-wrap.visible { display: block; }
+        .strength-track {
+            height: 4px; background: #ecf0f1; border-radius: 4px; overflow: hidden;
+        }
+        .strength-fill {
+            height: 100%; border-radius: 4px;
+            transition: width 0.4s ease, background 0.4s ease;
+            width: 0%;
+        }
+        .strength-label {
+            font-size: 11px; margin-top: 5px; font-weight: 600;
+        }
+
+        /* Terms checkbox */
+        .terms-row {
+            display: flex; align-items: flex-start; gap: 10px;
+            margin-bottom: 24px; font-size: 13px; color: #7f8c8d;
+            line-height: 1.5;
+        }
+        .terms-row input[type="checkbox"] {
+            width: 17px; height: 17px; margin-top: 2px;
+            cursor: pointer; accent-color: var(--primary); flex-shrink: 0;
+        }
+        .terms-row a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .terms-row a:hover { text-decoration: underline; }
+
+        /* Error banner */
+        .error-banner {
+            background: #ffeaea; border: 1px solid #ffb3b3;
+            border-radius: 10px; padding: 11px 15px;
+            color: #c0392b; font-size: 13px;
+            margin-bottom: 18px; display: none;
+            animation: bannerIn 0.3s ease-out;
+        }
+        .error-banner.show { display: block; }
+        @keyframes bannerIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* Submit button */
+        .signup-btn {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+            text-transform: uppercase; letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 24px;
+        }
+        .signup-btn::before {
+            content: '';
+            position: absolute; top:0; left:-100%;
+            width:100%; height:100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+            transition: left 0.5s;
+        }
+        .signup-btn:hover::before { left: 100%; }
+        .signup-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(102,126,234,0.4); }
+        .signup-btn:active { transform: translateY(0); }
+
+        /* Divider */
+        .divider { text-align: center; margin: 0 0 22px; position: relative; }
+        .divider::before, .divider::after { content:''; position:absolute; top:50%; width:38%; height:1px; background:#ecf0f1; }
+        .divider::before { left:0; }
+        .divider::after  { right:0; }
+        .divider span { background:white; padding:0 14px; color:#7f8c8d; font-size:12px; }
+
+        /* Social buttons */
+        .social-login { display: flex; gap: 14px; margin-bottom: 26px; }
+        .social-btn {
+            flex:1; padding: 11px;
+            border: 2px solid #ecf0f1; border-radius: 12px; background: white;
+            cursor: pointer; transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            font-size: 13px; font-weight: 600; color: var(--dark);
+            font-family: 'Poppins', sans-serif;
+        }
+        .social-btn:hover { border-color: var(--primary); background: #f8f9fa; transform: translateY(-2px); }
+        .social-btn svg { width: 19px; height: 19px; }
+
+        /* Login link */
+        .login-text { text-align: center; color: #7f8c8d; font-size: 14px; }
+        .login-text a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .login-text a:hover { text-decoration: underline; }
+
+        /* ── Success overlay after signup ── */
+        .success-overlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.75);
+            display: none; justify-content:center; align-items:center;
+            z-index: 9999;
+        }
+        .success-overlay.active { display: flex; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn  { from{opacity:0;} to{opacity:1;} }
+        @keyframes scaleIn { from{opacity:0;transform:scale(0.8);} to{opacity:1;transform:scale(1);} }
+
+        .success-modal {
+            background: white; border-radius: 30px; padding: 52px;
+            text-align: center; max-width: 480px; width: 90%;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            animation: scaleIn 0.5s ease-out;
+        }
+        .success-icon {
+            width:100px; height:100px;
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+            border-radius:50%;
+            display:flex; justify-content:center; align-items:center;
+            margin: 0 auto 28px;
+            animation: spin 0.8s ease-out 0.3s both;
+        }
+        @keyframes spin {
+            0%   { transform: scale(0) rotate(0deg); }
+            50%  { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        .success-icon svg { width:55px; height:55px; fill:white; }
+        .success-modal h1 { font-family:'Playfair Display',serif; font-size:34px; color:var(--dark); margin-bottom:12px; }
+        .success-modal p  { font-size:15px; color:#7f8c8d; line-height:1.6; margin-bottom:8px; }
+        .success-email    { font-weight:600; color:var(--primary); font-size:17px; margin:16px 0; }
+        .goto-login-btn {
+            margin-top:28px; padding:15px 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color:white; border:none; border-radius:12px;
+            font-size:16px; font-weight:600; cursor:pointer;
+            transition:all 0.3s; text-transform:uppercase; letter-spacing:1px;
+            font-family:'Poppins',sans-serif; display:inline-block;
+        }
+        .goto-login-btn:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(102,126,234,0.4); }
+
+        @media (max-width: 850px) {
+            .signup-visual { display: none; }
+            .signup-form-container { padding: 40px 30px; max-height: none; }
+        }
+        @media (max-width: 500px) {
+            .input-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="particles">
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- ── Sign Up Success Modal ── -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-modal">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
+            <h1>Account Created!</h1>
+            <p>Welcome to SecureSpace! Your account has been successfully created.</p>
+            <div class="success-email" id="successEmail"></div>
+            <p style="font-size:13px;">You can now log in with your credentials.</p>
+            <button class="goto-login-btn" onclick="goToLogin()">Go to Login</button>
+        </div>
+    </div>
+
+    <!-- ── Main Signup Card ── -->
+    <div class="signup-wrapper">
+
+        <!-- Left Visual -->
+        <div class="signup-visual">
+            <div class="visual-content">
+                <div class="logo-circle">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V9.99h7V2.06l8 3.94v7.99h-8z"/></svg>
+                </div>
+                <h2>Join<br>SecureSpace</h2>
+                <p>Create your account in seconds and<br>start your secure journey today.</p>
+
+                <div class="steps-list">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <div class="step-text">
+                            <strong>Create your account</strong>
+                            Fill in your details below
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <div class="step-text">
+                            <strong>Verify your email</strong>
+                            Confirm your email address
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <div class="step-text">
+                            <strong>Start exploring</strong>
+                            Access your secure dashboard
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Form -->
+        <div class="signup-form-container">
+            <div class="form-header">
+                <h1>Create Account</h1>
+                <p>Fill in the details below to get started</p>
+            </div>
+
+            <div class="error-banner" id="errorBanner"></div>
+
+            <form id="signupForm">
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="firstName">First Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="firstName" placeholder="John" autocomplete="given-name">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastName">Last Name</label>
+                        <div class="input-wrapper">
+                            <input type="text" id="lastName" placeholder="Doe" autocomplete="family-name">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="email" placeholder="you@example.com" autocomplete="email">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="Min. 6 characters" autocomplete="new-password">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        <span class="password-toggle" id="togglePass">SHOW</span>
+                    </div>
+                    <div class="strength-bar-wrap" id="strengthWrap">
+                        <div class="strength-track">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-label" id="strengthLabel"></div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirmPassword" placeholder="Repeat your password" autocomplete="new-password">
+                        <svg class="input-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        <span class="password-toggle" id="toggleConfirm">SHOW</span>
+                    </div>
+                </div>
+
+                <div class="terms-row">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a> of SecureSpace
+                    </label>
+                </div>
+
+                <button type="submit" class="signup-btn">Create My Account</button>
+            </form>
+
+            <div class="divider"><span>or sign up with</span></div>
+
+            <div class="social-login">
+                <button class="social-btn" id="googleSignup">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                    </svg>
+                    Google
+                </button>
+                <button class="social-btn" id="githubSignup">
+                    <svg viewBox="0 0 24 24" fill="#181717">
+                        <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                    </svg>
+                    GitHub
+                </button>
+            </div>
+
+            <div class="login-text">
+                Already have an account? <a href="login.html">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── Password toggle ──
+        document.getElementById('togglePass').addEventListener('click', function() {
+            const input = document.getElementById('password');
+            const type  = input.type === 'password' ? 'text' : 'password';
+            input.type  = type;
+            this.textContent = type === 'password' ? 'SHOW' : 'HIDE';
+        });
+
+        document.getElementById('toggleConfirm').addEventListener('click', function() {
+            const input = document.getElementById('confirmPassword');
+            const type  = input.type === 'password' ? 'text' : 'password';
+            input.type  = type;
+            this.textContent = type === 'password' ? 'SHOW' : 'HIDE';
+        });
+
+        // ── Password strength meter ──
+        document.getElementById('password').addEventListener('input', function() {
+            const val  = this.value;
+            const wrap = document.getElementById('strengthWrap');
+            const fill = document.getElementById('strengthFill');
+            const lbl  = document.getElementById('strengthLabel');
+
+            if (!val) { wrap.classList.remove('visible'); return; }
+            wrap.classList.add('visible');
+
+            let score = 0;
+            if (val.length >= 6)  score++;
+            if (val.length >= 10) score++;
+            if (/[A-Z]/.test(val)) score++;
+            if (/[0-9]/.test(val)) score++;
+            if (/[^A-Za-z0-9]/.test(val)) score++;
+
+            const levels = [
+                { w:'20%',  bg:'#e74c3c', text:'Weak',      color:'#e74c3c' },
+                { w:'40%',  bg:'#e67e22', text:'Fair',       color:'#e67e22' },
+                { w:'60%',  bg:'#f39c12', text:'Good',       color:'#f39c12' },
+                { w:'80%',  bg:'#2ecc71', text:'Strong',     color:'#2ecc71' },
+                { w:'100%', bg:'#27ae60', text:'Very Strong', color:'#27ae60' },
+            ];
+
+            const lvl = levels[Math.min(score - 1, 4)] || levels[0];
+            fill.style.width      = lvl.w;
+            fill.style.background = lvl.bg;
+            lbl.textContent       = lvl.text;
+            lbl.style.color       = lvl.color;
+        });
+
+        // ── Clear errors on input ──
+        ['firstName','lastName','email','password','confirmPassword'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.classList.remove('error');
+                document.getElementById('errorBanner').classList.remove('show');
+            });
+        });
+
+        // ── Validation helpers ──
+        function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
+
+        function showError(msg) {
+            const b = document.getElementById('errorBanner');
+            b.textContent = msg;
+            b.classList.add('show');
+            b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // ── Form submit ──
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName  = document.getElementById('lastName').value.trim();
+            const email     = document.getElementById('email').value.trim();
+            const password  = document.getElementById('password').value;
+            const confirm   = document.getElementById('confirmPassword').value;
+            const terms     = document.getElementById('terms').checked;
+
+            // Reset
+            ['firstName','lastName','email','password','confirmPassword'].forEach(id =>
+                document.getElementById(id).classList.remove('error')
+            );
+            document.getElementById('errorBanner').classList.remove('show');
+
+            // Validate
+            if (!firstName) {
+                document.getElementById('firstName').classList.add('error');
+                return showError('👤 First name is required');
+            }
+            if (!lastName) {
+                document.getElementById('lastName').classList.add('error');
+                return showError('👤 Last name is required');
+            }
+            if (!email) {
+                document.getElementById('email').classList.add('error');
+                return showError('📧 Email address is required');
+            }
+            if (!isValidEmail(email)) {
+                document.getElementById('email').classList.add('error');
+                return showError('📧 Please enter a valid email address');
+            }
+            if (!password) {
+                document.getElementById('password').classList.add('error');
+                return showError('🔒 Password is required');
+            }
+            if (password.length < 6) {
+                document.getElementById('password').classList.add('error');
+                return showError('🔒 Password must be at least 6 characters');
+            }
+            if (!confirm) {
+                document.getElementById('confirmPassword').classList.add('error');
+                return showError('🔒 Please confirm your password');
+            }
+            if (password !== confirm) {
+                document.getElementById('confirmPassword').classList.add('error');
+                return showError('🔒 Passwords do not match');
+            }
+            if (!terms) {
+                return showError('☑️ Please agree to the Terms of Service to continue');
+            }
+
+            // ── All good — show success modal ──
+            document.getElementById('successEmail').textContent = email;
+            document.getElementById('successOverlay').classList.add('active');
+        });
+
+        function goToLogin() {
+            window.location.href = 'login.html';
+        }
+
+        // ── Social buttons ──
+        document.getElementById('googleSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🔵 Google Sign Up\n\nYou would be redirected to Google OAuth.');
+        });
+        document.getElementById('githubSignup').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('⚫ GitHub Sign Up\n\nYou would be redirected to GitHub OAuth.');
+        });
+
+        // ── Smooth fade in ──
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
