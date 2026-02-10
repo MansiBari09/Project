@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
+
+:root {
+    --deepBlue: #181c2e;
+    --lightBlue: #2b84ea;
+    --lightBlue300: #4b94ed;
+    --lightBlue500: #0b72e7;
+    --greenLight: #61cea6;
+    --grayBlue: #344a6c;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+}
+
+.bg-deepBlue { background-color: var(--deepBlue); }
+.text-lightBlue { color: var(--lightBlue); }
+.bg-lightBlue { background-color: var(--lightBlue); }
+.bg-greenLight { background-color: var(--greenLight); }
+
+/* Animation for smooth interaction */
+.transition-all {
+    transition: all 0.3s ease-in-out;
+}

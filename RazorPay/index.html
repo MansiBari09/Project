@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razorpay Clone | Online Payments India</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="overflow-x-hidden font-muli">
+
+    <nav class="bg-deepBlue flex justify-between items-center py-4 px-8 sticky top-0 z-50">
+        <div class="flex items-center space-x-8">
+            <img src="https://razorpay.com/assets/razorpay-logo-white.svg" width="125px" alt="Logo">
+            <ul class="hidden lg:flex space-x-6 text-white font-medium opacity-80">
+                <li class="hover:text-lightBlue transition-all cursor-pointer">Payments</li>
+                <li class="hover:text-lightBlue transition-all cursor-pointer">Banking</li>
+                <li class="hover:text-lightBlue transition-all cursor-pointer">Corporate Card</li>
+                <li class="hover:text-lightBlue transition-all cursor-pointer">Payroll</li>
+                <li class="hover:text-lightBlue transition-all cursor-pointer">Resources</li>
+            </ul>
+        </div>
+        <div class="flex items-center space-x-6">
+            <img src="https://flagcdn.com/w40/in.png" width="25px" class="hidden md:block">
+            <button class="text-white border border-lightBlue px-4 py-2 rounded-sm font-bold hidden md:block">Log In</button>
+            <button class="bg-white text-lightBlue300 px-4 py-2 rounded-sm font-bold hover:text-lightBlue500 transition-all">Sign Up →</button>
+        </div>
+    </nav>
+
+    <section class="relative bg-deepBlue w-full pt-16 pb-32 md:pt-24 md:pb-52 overflow-hidden">
+        <div class="max-w-[1080px] mx-auto flex flex-col md:flex-row items-center justify-between px-6">
+            <div class="space-y-8 text-white w-full md:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight">Power your finance, <br> grow your business</h1>
+                <div class="w-10 h-1 bg-greenLight"></div>
+                <p class="text-lg opacity-70">Accept any payment method. Get access to banking, credit, and payroll. Join 10M+ businesses today.</p>
+                <button class="bg-lightBlue px-6 py-3 rounded-md font-bold hover:bg-lightBlue500 transition-all">Sign Up Now</button>
+            </div>
+            <div class="w-full md:w-1/2 mt-12 md:mt-0 relative">
+                <img src="https://razorpay.com/build/browser/static/home-hero.2c396d11.png" class="w-full z-10 relative">
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full">
+            <svg viewBox="0 0 1440 320" class="w-full">
+                <path fill="#ffffff" d="M0,160L1440,256L1440,320L0,320Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section class="bg-white py-20 px-6">
+        <div class="max-w-[1080px] mx-auto text-center">
+            <h2 class="text-2xl font-bold">Accept Payments with Razorpay</h2>
+            <div class="w-10 h-1 bg-greenLight mx-auto mt-2"></div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition-all cursor-pointer rounded-lg text-left group">
+                    <i class="fa-solid fa-bolt text-lightBlue text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Payment Gateway</h3>
+                    <p class="text-gray-500">Superior checkout experience with 100+ payment methods.</p>
+                    <div class="mt-4 text-lightBlue font-bold group-hover:translate-x-2 transition-transform">Know More →</div>
+                </div>
+                <div class="p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition-all cursor-pointer rounded-lg text-left group">
+                    <i class="fa-solid fa-link text-lightBlue text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Payment Links</h3>
+                    <p class="text-gray-500">Share payment links via email, SMS, or WhatsApp.</p>
+                    <div class="mt-4 text-lightBlue font-bold group-hover:translate-x-2 transition-transform">Know More →</div>
+                </div>
+                <div class="p-8 border border-gray-100 shadow-lg hover:shadow-2xl transition-all cursor-pointer rounded-lg text-left group">
+                    <i class="fa-solid fa-file-invoice text-lightBlue text-3xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Invoices</h3>
+                    <p class="text-gray-500">Create and send GST compliant professional invoices.</p>
+                    <div class="mt-4 text-lightBlue font-bold group-hover:translate-x-2 transition-transform">Know More →</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
